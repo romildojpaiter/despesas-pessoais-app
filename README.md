@@ -1,7 +1,6 @@
-# expenses
+# Expenses App
 
-A new Flutter project.
-
+A new Flutter project, based by Course: Flutter e Desenvolva Apps Para Android e IOS 2020
 ## Getting Started
 
 This project is a starting point for a Flutter application.
