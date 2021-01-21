@@ -26,7 +26,7 @@ class MyHomePage extends StatelessWidget {
     Transaction(
       id: 't2',
       title: 'Conta de Internet',
-      value: 255.78,
+      value: 255.7,
       date: DateTime.now(),
     ),
   ];
@@ -63,13 +63,19 @@ class MyHomePage extends StatelessWidget {
                         vertical: 10,
                       ),
                       decoration: BoxDecoration(
-                          border: Border.all(
-                        color: Colors.black,
-                        width: 2,
-                      )),
+                        border: Border.all(
+                          color: Colors.purple,
+                          width: 2,
+                        ),
+                      ),
                       padding: EdgeInsets.all(10),
                       child: Text(
                         tr.value.toString(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.purple,
+                        ),
                       ),
                     ),
                     Column(
