@@ -17,6 +17,9 @@ class ExpensesApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   //
+  String title;
+  String value;
+
   final _transactions = [
     Transaction(
       id: 't1',
@@ -41,7 +44,7 @@ class MyHomePage extends StatelessWidget {
       body: Column(
         // O main AxisAlignment pode variar conforme o tipo de
         // componente utilizado. Column(Cima -> baixo), Row (Esquerda -> direita)
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        // mainAxisAlignment: MainAxisAlignment.spaceAround,
         // stretch é utilizado para ocupar a área inteira da coluna
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -100,6 +103,39 @@ class MyHomePage extends StatelessWidget {
               );
             }).toList(),
           ),
+          Card(
+            elevation: 5,
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Título'),
+                    onChanged: (newValue) => title = newValue,
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Valor (R\$)'),
+                    onChanged: (newValue) => value = newValue,
+                    // Utilizado para mostrar o tipo do teclado
+                    keyboardType: TextInputType.number,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      FlatButton(
+                        child: Text('Nova Transação'),
+                        textColor: Colors.purple,
+                        onPressed: () {
+                          print(title);
+                          print(value);
+                        },
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
