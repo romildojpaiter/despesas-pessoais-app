@@ -17,8 +17,8 @@ class ExpensesApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   //
-  String title;
-  String value;
+  final titleControler = TextEditingController();
+  final valueControler = TextEditingController();
 
   final _transactions = [
     Transaction(
@@ -110,12 +110,12 @@ class MyHomePage extends StatelessWidget {
               child: Column(
                 children: [
                   TextField(
+                    controller: titleControler,
                     decoration: InputDecoration(labelText: 'Título'),
-                    onChanged: (newValue) => title = newValue,
                   ),
                   TextField(
+                    controller: valueControler,
                     decoration: InputDecoration(labelText: 'Valor (R\$)'),
-                    onChanged: (newValue) => value = newValue,
                     // Utilizado para mostrar o tipo do teclado
                     keyboardType: TextInputType.number,
                   ),
@@ -126,8 +126,8 @@ class MyHomePage extends StatelessWidget {
                         child: Text('Nova Transação'),
                         textColor: Colors.purple,
                         onPressed: () {
-                          print(title);
-                          print(value);
+                          print(titleControler.text);
+                          print(valueControler.text);
                         },
                       )
                     ],
