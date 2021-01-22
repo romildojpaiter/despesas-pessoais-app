@@ -23,23 +23,25 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Despesas Pessoais"),
       ),
-      body: Column(
-        // O main AxisAlignment pode variar conforme o tipo de
-        // componente utilizado. Column(Cima -> baixo), Row (Esquerda -> direita)
-        // mainAxisAlignment: MainAxisAlignment.spaceAround,
-        // stretch é utilizado para ocupar a área inteira da coluna
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            child: Card(
-              color: Colors.blue,
-              child: Text('Gráfico'),
-              elevation: 5,
+      body: SingleChildScrollView(
+        child: Column(
+          // O main AxisAlignment pode variar conforme o tipo de
+          // componente utilizado. Column(Cima -> baixo), Row (Esquerda -> direita)
+          // - mainAxisAlignment: MainAxisAlignment.spaceAround,
+          // stretch é utilizado para ocupar a área inteira da coluna
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              child: Card(
+                color: Colors.blue,
+                child: Text('Gráfico'),
+                elevation: 5,
+              ),
             ),
-          ),
-          TransactionUser()
-        ],
+            TransactionUser()
+          ],
+        ),
       ),
     );
   }
