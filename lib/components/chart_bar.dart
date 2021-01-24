@@ -13,12 +13,15 @@ class ChartBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('R\$${sumDay.toStringAsFixed(2)}'),
+        FittedBox(
+          child: Text('${sumDay.toStringAsFixed(2)}'),
+        ),
         SizedBox(height: 5),
         Container(
           height: 80,
           width: 10,
           child: Stack(
+            alignment: Alignment.bottomCenter,
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -29,6 +32,15 @@ class ChartBar extends StatelessWidget {
                     color: Color.fromRGBO(220, 220, 220, 1),
                     borderRadius: BorderRadius.circular(5)),
               ),
+              FractionallySizedBox(
+                heightFactor: percent,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+              )
             ],
           ),
         ),

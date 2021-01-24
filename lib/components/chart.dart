@@ -31,20 +31,36 @@ class Chart extends StatelessWidget {
     });
   }
 
+  /// Função fold funciona como um reduce que trabalha
+  /// acumulando a soma dos valores
+  double get _weekTotalValue {
+    return this
+        .recentTransaction
+        .map((e) => e.value)
+        .fold(0.0, (p, c) => p + c);
+  }
+
   @override
   Widget build(BuildContext context) {
     groupedTransaction;
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
-      child: Row(
-        children: groupedTransaction
-            .map((e) => ChartBar(
-                  label: e['day'],
-                  sumDay: e['value'],
-                  percent: 0.0,
-                ))
-            .toList(),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransaction
+              .map((e) => Flexible(
+                    fit: FlexFit.tight,
+                    child: ChartBar(
+                      label: e['day'],
+                      sumDay: e['value'],
+                      percent: (e['value'] as double) / _weekTotalValue,
+                    ),
+                  ))
+              .toList(),
+        ),
       ),
     );
   }
