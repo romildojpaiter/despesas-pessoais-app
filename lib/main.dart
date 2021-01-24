@@ -1,3 +1,4 @@
+import 'package:expenses/components/chart.dart';
 import 'package:expenses/components/transaction_form.dart';
 import 'package:expenses/components/transaction_list.dart';
 
@@ -44,18 +45,24 @@ class _MyHomePageState extends State<MyHomePage> {
   //
 
   final List<Transaction> _transactions = <Transaction>[
-    // Transaction(
-    //   id: 't1',
-    //   title: 'Novo tenis de corrida',
-    //   value: 301.78,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Conta de Internet',
-    //   value: 255.7,
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id: 't1',
+      title: 'Novo tenis de corrida',
+      value: 400.78,
+      date: DateTime.now().subtract(Duration(days: 9)),
+    ),
+    Transaction(
+      id: 't1',
+      title: 'Novo tenis de corrida',
+      value: 301.78,
+      date: DateTime.now().subtract(Duration(days: 3)),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Conta de Internet',
+      value: 255.7,
+      date: DateTime.now().subtract(Duration(days: 4)),
+    ),
   ];
 
   /// Função responsavel por receber os valores solicitados no formulario
@@ -71,6 +78,14 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     Navigator.of(context).pop();
+  }
+
+  List<Transaction> get _recentTransactions {
+    return _transactions
+        .where((element) => element.date.isAfter(DateTime.now().subtract(
+              Duration(days: 7),
+            )))
+        .toList();
   }
 
   _openTransactionFormModal(BuildContext context) {
@@ -102,18 +117,12 @@ class _MyHomePageState extends State<MyHomePage> {
           // stretch é utilizado para ocupar a área inteira da coluna
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: Colors.blue,
-                child: Text('Gráfico'),
-                elevation: 5,
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_transactions),
           ],
         ),
       ),
+      // Método que tem a função de inserir um botão no rodapé
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () => _openTransactionFormModal(context),
