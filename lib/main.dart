@@ -19,6 +19,16 @@ class ExpensesApp extends StatelessWidget {
         primarySwatch: Colors.purple,
         // Cor de realce de alguns botoes'
         accentColor: Colors.amber,
+        // Aplicando Fonts
+        fontFamily: 'Quicksand',
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                title: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+        ),
       ),
     );
   }
@@ -33,19 +43,19 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   //
 
-  final _transactions = [
-    Transaction(
-      id: 't1',
-      title: 'Novo tenis de corrida',
-      value: 301.78,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Conta de Internet',
-      value: 255.7,
-      date: DateTime.now(),
-    ),
+  final List<Transaction> _transactions = <Transaction>[
+    // Transaction(
+    //   id: 't1',
+    //   title: 'Novo tenis de corrida',
+    //   value: 301.78,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Conta de Internet',
+    //   value: 255.7,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   /// Função responsavel por receber os valores solicitados no formulario
@@ -76,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Despesas Pessoais"),
+        title: Text('Despesas Pessoais'),
         actions: [
           IconButton(
             icon: Icon(Icons.add),
