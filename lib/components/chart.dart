@@ -47,12 +47,13 @@ class Chart extends StatelessWidget {
       elevation: 6,
       margin: EdgeInsets.all(20),
       child: Padding(
+        // Component de padding
         padding: const EdgeInsets.all(10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: groupedTransaction
               .map((e) => Flexible(
-                    fit: FlexFit.tight,
+                    fit: FlexFit.tight, // tight = apertado
                     child: ChartBar(
                       label: e['day'],
                       sumDay: e['value'],
