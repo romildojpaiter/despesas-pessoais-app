@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 /// Classe responsável por manter o Formulario de Cadastro do Form
 class TransactionForm extends StatefulWidget {
@@ -13,18 +14,38 @@ class TransactionForm extends StatefulWidget {
 
 class _TransactionFormState extends State<TransactionForm> {
   //
-  final titleControler = TextEditingController();
-  final valueControler = TextEditingController();
+  final _titleControler = TextEditingController();
+  final _valueControler = TextEditingController();
+  DateTime _selectedDate;
 
   _submitForm() {
-    final title = titleControler.text;
-    final value = double.tryParse(valueControler.text) ?? 0.0;
+    final title = _titleControler.text;
+    final value = double.tryParse(_valueControler.text) ?? 0.0;
 
     if (title.isEmpty || value <= 0) {
       return;
     }
 
     widget.onSubmit(title, value);
+  }
+
+  _showDataPicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime.now(),
+    ).then((value) {
+      if (value == null) {
+        return;
+      }
+
+      setState(() {
+        _selectedDate = value;
+      });
+    });
+
+    print('Executado');
   }
 
   @override
@@ -38,11 +59,11 @@ class _TransactionFormState extends State<TransactionForm> {
         child: Column(
           children: [
             TextField(
-              controller: titleControler,
+              controller: _titleControler,
               decoration: InputDecoration(labelText: 'Título'),
             ),
             TextField(
-              controller: valueControler,
+              controller: _valueControler,
               decoration: InputDecoration(labelText: 'Valor (R\$)'),
               onSubmitted: (_) => _submitForm(),
               // Utilizado para mostrar o tipo do teclado
@@ -52,14 +73,20 @@ class _TransactionFormState extends State<TransactionForm> {
               height: 70,
               child: Row(
                 children: [
-                  Text('Nenhuma data selecionada'),
+                  Expanded(
+                    child: Text(
+                      _selectedDate == null
+                          ? 'Nenhuma data selecionada'
+                          : 'Data Selecionada ${DateFormat('dd/MM/y').format(_selectedDate)}',
+                    ),
+                  ),
                   FlatButton(
                     child: Text(
                       'Selecionar data',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     textColor: Theme.of(context).primaryColor,
-                    onPressed: () {},
+                    onPressed: _showDataPicker,
                   )
                 ],
               ),
