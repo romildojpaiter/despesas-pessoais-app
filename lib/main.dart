@@ -46,14 +46,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List<Transaction> _transactions = <Transaction>[
     Transaction(
-      id: 't1',
+      id: 't0',
       title: 'Novo tenis de corrida',
       value: 400.78,
       date: DateTime.now().subtract(Duration(days: 9)),
     ),
     Transaction(
       id: 't1',
-      title: 'Novo tenis de corrida',
+      title: 'Novo tenis de corrida 2',
       value: 301.78,
       date: DateTime.now().subtract(Duration(days: 3)),
     ),
@@ -63,6 +63,30 @@ class _MyHomePageState extends State<MyHomePage> {
       value: 255.7,
       date: DateTime.now().subtract(Duration(days: 4)),
     ),
+    Transaction(
+      id: 't3',
+      title: 'Compra Debidot',
+      value: 45000.73,
+      date: DateTime.now().subtract(Duration(days: 3)),
+    ),
+    Transaction(
+      id: 't4',
+      title: 'Conta de Gaz',
+      value: 11.65,
+      date: DateTime.now().subtract(Duration(days: 2)),
+    ),
+    Transaction(
+      id: 't5',
+      title: 'Cartao de Crédito',
+      value: 255000.73,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't6',
+      title: 'Conta de Luz',
+      value: 11.65,
+      date: DateTime.now(),
+    )
   ];
 
   /// Função responsavel por receber os valores solicitados no formulario
