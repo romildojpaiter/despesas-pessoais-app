@@ -115,7 +115,21 @@ class _MyHomePageState extends State<MyHomePage> {
           // stretch é utilizado para ocupar a área inteira da coluna
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Text(
+                'Gráfico semanal',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
             Chart(_recentTransactions),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Text(
+                'Despesas',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
             TransactionList(_transactions, _removeTransaction),
           ],
         ),
