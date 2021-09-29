@@ -1,10 +1,12 @@
+import 'dart:math';
+import 'dart:io';
+
 import 'package:expenses/components/chart.dart';
 import 'package:expenses/components/transaction_form.dart';
 import 'package:expenses/components/transaction_list.dart';
 
 import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 main() => runApp(ExpensesApp());
 
@@ -97,16 +99,23 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final appBar = AppBar(
+      title: Text('Despesas Pessoais'),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () => _openTransactionFormModal(context),
+        ),
+      ],
+    );
+
+    final availableHeight = mediaQuery.size.height -
+        appBar.preferredSize.height -
+        mediaQuery.padding.top;
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Despesas Pessoais'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => _openTransactionFormModal(context),
-          ),
-        ],
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           // O main AxisAlignment pode variar conforme o tipo de
@@ -122,7 +131,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
-            Chart(_recentTransactions),
+            Container(
+              height: availableHeight * 0.25,
+              child: Chart(_recentTransactions),
+            ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Text(
@@ -130,15 +142,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
-            TransactionList(_transactions, _removeTransaction),
+            Container(
+              height: availableHeight * 0.5,
+              child: TransactionList(_transactions, _removeTransaction),
+            ),
           ],
         ),
       ),
       // Método que tem a função de inserir um botão no rodapé
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _openTransactionFormModal(context),
-      ),
+      floatingActionButton: Platform.isIOS
+          ? Container()
+          : FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () => _openTransactionFormModal(context),
+            ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
