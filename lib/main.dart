@@ -19,13 +19,9 @@ class ExpensesApp extends StatelessWidget {
       home: MyHomePage(),
       theme: ThemeData(
         // Cor padrao do sistema
-        primarySwatch: Colors.purple,
-        // Cor de realce de alguns botoes'
-        accentColor: Colors.amber,
-        // Aplicando Fonts
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(
-              title: TextStyle(
+              subtitle1: TextStyle(
                 fontFamily: 'OpenSabs',
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -36,13 +32,13 @@ class ExpensesApp extends StatelessWidget {
               ),
             ),
         appBarTheme: AppBarTheme(
-          textTheme: ThemeData.light().textTheme.copyWith(
-                title: TextStyle(
-                    fontFamily: 'OpenSans',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              ),
+          toolbarTextStyle: TextStyle(
+              fontFamily: 'OpenSans',
+              fontSize: 20,
+              fontWeight: FontWeight.bold),
         ),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
+            .copyWith(secondary: Colors.amber),
       ),
     );
   }
@@ -132,11 +128,11 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Container(
-              height: availableHeight * 0.25,
+              height: availableHeight * 0.26,
               child: Chart(_recentTransactions),
             ),
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(12),
               child: Text(
                 'Despesas',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
