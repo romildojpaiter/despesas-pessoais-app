@@ -139,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Container(
-              height: availableHeight * 0.5,
+              height: availableHeight * 0.6,
               child: TransactionList(_transactions, _removeTransaction),
             ),
           ],
